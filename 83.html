@@ -1,0 +1,485 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>EMLOG评论外链跳转代码以及方法 | 汐岑小窝</title><meta name="author" content="亦桉"><meta name="copyright" content="亦桉"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="这段时间看了很多的博客，好多都使用了PHP跳转技术进行外链页面的跳转，减少网站权重的流失，在博客112导航看到了这个代码，整理分享给大家。 1、新建一个go.php文件，在go.php里面输入以下代码（记得修改代码中的blog.aneu.cn改为你自己的域名），然后上传到网站根目录下。 12345678910111213141516171819202122232425262728293031323">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EMLOG评论外链跳转代码以及方法">
+<meta property="og:url" content="https://blog.aneu.cn/83.html">
+<meta property="og:site_name" content="汐岑小窝">
+<meta property="og:description" content="这段时间看了很多的博客，好多都使用了PHP跳转技术进行外链页面的跳转，减少网站权重的流失，在博客112导航看到了这个代码，整理分享给大家。 1、新建一个go.php文件，在go.php里面输入以下代码（记得修改代码中的blog.aneu.cn改为你自己的域名），然后上传到网站根目录下。 12345678910111213141516171819202122232425262728293031323">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p.upyun.com/demo/tmp/GdKbdDmz.webp">
+<meta property="article:published_time" content="2017-08-22T10:30:00.000Z">
+<meta property="article:modified_time" content="2025-05-02T10:19:31.704Z">
+<meta property="article:author" content="亦桉">
+<meta property="article:tag" content="代码">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p.upyun.com/demo/tmp/GdKbdDmz.webp"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "EMLOG评论外链跳转代码以及方法",
+  "url": "https://blog.aneu.cn/83.html",
+  "image": "https://p.upyun.com/demo/tmp/GdKbdDmz.webp",
+  "datePublished": "2017-08-22T10:30:00.000Z",
+  "dateModified": "2025-05-02T10:19:31.704Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "亦桉",
+      "url": "https://blog.aneu.cn/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://www.aneu.cn/favicon.ico"><link rel="canonical" href="https://blog.aneu.cn/83.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="Iea0zKFtsOrPd8o0"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?1cc4d489bb1227d321c45832b762015e";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+btf.addGlobalFn('pjaxComplete', () => {
+  _hmt.push(['_trackPageview',window.location.pathname])
+}, 'baidu_analytics')
+</script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;a87d0f05cd974733af90899ccef8df42&quot;}"></script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":100,"languages":{"author":"作者: 亦桉","link":"链接: ","source":"来源: 汐岑小窝","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'FancyBox',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'EMLOG评论外链跳转代码以及方法',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="//at.alicdn.com/t/font_1779604_1xz178xgroa.css"><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js/themes/blue/pace-theme-minimal.min.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://q1.qlogo.cn/g?b=qq&amp;nk=898467886&amp;s=640" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">169</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">181</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/privacy-policy/"><i class="fa-fw fas fa-shield-halved"></i><span> 隐私政策</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://p.upyun.com/demo/tmp/GdKbdDmz.webp);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">汐岑小窝</span></a><a class="nav-page-title" href="/"><span class="site-name">EMLOG评论外链跳转代码以及方法</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/privacy-policy/"><i class="fa-fw fas fa-shield-halved"></i><span> 隐私政策</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">EMLOG评论外链跳转代码以及方法</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2017-08-22T10:30:00.000Z" title="发表于 2017-08-22 18:30:00">2017-08-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-05-02T10:19:31.704Z" title="更新于 2025-05-02 18:19:31">2025-05-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">796</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/83.html#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/83.html" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:180,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2025-05-02 18:19:31&quot;}" hidden></div><p>这段时间看了很多的博客，好多都使用了PHP跳转技术进行外链页面的跳转，减少网站权重的流失，在博客112导航看到了这个代码，整理分享给大家。</p>
+<p>1、新建一个go.php文件，在go.php里面输入以下代码（记得修改代码中的<a href="https://blog.aneu.cn/">blog.aneu.cn</a>改为你自己的域名），然后上传到网站根目录下。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    $t\_url=$\_GET\[&#x27;url&#x27;\];</span><br><span class="line">    if(!empty($t\_url)) &#123;</span><br><span class="line">        preg\_match(&#x27;/(httphttp):\\/\\//&#x27;,$t\_url,$matches);</span><br><span class="line">        if($matches)&#123;</span><br><span class="line">            $url=$t\_url;</span><br><span class="line">            $title=&#x27;页面跳转中,请稍候...&#x27;;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            preg\_match(&#x27;/\\./i&#x27;,$t\_url,$matche);</span><br><span class="line">            if($matche)&#123;</span><br><span class="line">                $url=&#x27;http://&#x27;.$t\_url;</span><br><span class="line">                $title=&#x27;页面跳转中,请稍候...&#x27;;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                $url=&#x27;https://blog.aneu.cn/&#x27;;</span><br><span class="line">                $title=&#x27;参数错误，正在返回首页...&#x27;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $title=&#x27;参数缺失，正在返回首页...&#x27;;</span><br><span class="line">        $url=&#x27;https://blog.aneu.cn/&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">    ?&gt;</span><br><span class="line">    &lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;refresh&quot; content=&quot;1;url=&#x27;&lt;?php echo $url;?&gt;&#x27;;&quot;&gt;</span><br><span class="line">    &lt;title&gt;&lt;?php echo $title;?&gt;&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">    body&#123;background:#000&#125;.loading&#123;-webkit-animation:fadein 2s;-moz-animation:fadein 2s;-o-animation:fadein 2s;animation:fadein 2s&#125;@-moz-keyframes fadein&#123;from&#123;opacity:0&#125;to&#123;opacity:1&#125;&#125;@-webkit-keyframes fadein&#123;from&#123;opacity:0&#125;to&#123;opacity:1&#125;&#125;@-o-keyframes fadein&#123;from&#123;opacity:0&#125;to&#123;opacity:1&#125;&#125;@keyframes fadein&#123;from&#123;opacity:0&#125;to&#123;opacity:1&#125;&#125;.spinner-wrapper&#123;position:absolute;top:0;left:0;z-index:300;height:100%;min-width:100%;min-height:100%;background:rgba(255,255,255,0.93)&#125;.spinner-text&#123;position:absolute;top:50%;left:50%;margin-left:-90px;margin-top: 2px;color:#BBB;letter-spacing:1px;font-weight:700;font-size:36px;font-family:Arial&#125;.spinner&#123;position:absolute;top:50%;left:50%;display:block;margin-left:-160px;width:1px;height:1px;border:25px solid rgba(255,0,0,1);-webkit-border-radius:50px;-moz-border-radius:50px;border-radius:50px;border-left-color:transparent;border-right-color:transparent;-webkit-animation:spin 1.5s infinite;-moz-animation:spin 1.5s infinite;animation:spin 1.5s infinite&#125;@-webkit-keyframes spin&#123;0%,100%&#123;-webkit-transform:rotate(0deg) scale(1)&#125;50%&#123;-webkit-transform:rotate(720deg) scale(0.6)&#125;&#125;@-moz-keyframes spin&#123;0%,100%&#123;-moz-transform:rotate(0deg) scale(1)&#125;50%&#123;-moz-transform:rotate(720deg) scale(0.6)&#125;&#125;@-o-keyframes spin&#123;0%,100%&#123;-o-transform:rotate(0deg) scale(1)&#125;50%&#123;-o-transform:rotate(720deg) scale(0.6)&#125;&#125;@keyframes spin&#123;0%,100%&#123;transform:rotate(0deg) scale(1)&#125;50%&#123;transform:rotate(720deg) scale(0.6)&#125;&#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">    &lt;div class=&quot;loading&quot;&gt;</span><br><span class="line">      &lt;div class=&quot;spinner-wrapper&quot;&gt;</span><br><span class="line">        &lt;span class=&quot;spinner-text&quot;&gt;页面跳转中,请稍候...&lt;/span&gt;</span><br><span class="line">        &lt;span class=&quot;spinner&quot;&gt;&lt;/span&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">    &lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>2、在添加外链的时候，只要给外链加上统一的跳转前缀：http:&#x2F;&#x2F;你的域名&#x2F;go.php?url&#x3D;，即可实现<a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com/</a> 的跳转形式。</p>
+<p>那这个代码怎么用在emlog博客程序中呢？</p>
+<p>同样的将go.php文件上传到网站根目录中，打开模板的module.php文件，找到以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;&#x27;.$comment\[&#x27;url&#x27;\].&#x27;&quot; target=&quot;\_blank&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>将其替换成：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;/go.php?url=&#x27;.$comment\[&#x27;url&#x27;\].&#x27;&quot; target=&quot;\_blank&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>本文转自AE博客</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.aneu.cn">亦桉</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.aneu.cn/83.html">https://blog.aneu.cn/83.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://blog.aneu.cn" target="_blank">汐岑小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%BB%A3%E7%A0%81/">代码</a></div><div class="post-share"><div class="social-share" data-image="https://p.upyun.com/demo/tmp/GdKbdDmz.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://imgdrive.010102.xyz/images/2020/03/1dfe50d80dbd6.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgdrive.010102.xyz/images/2020/03/1dfe50d80dbd6.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://imgdrive.010102.xyz/images/2020/03/40130be05e76e.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgdrive.010102.xyz/images/2020/03/40130be05e76e.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/78.html" title="《未上锁的房间》通关攻略"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://p.upyun.com/demo/tmp/W6nS2nVT.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">《未上锁的房间》通关攻略</div></div><div class="info-2"><div class="info-item-1">这款解谜游戏赢得了无数苹果用户的芳心，游戏难度比较大，并且还没有中文版，所以英文不好的玩家玩起来会比较吃力，小编这里给玩家们带来一片图文攻略，帮助玩家们顺利通关。 前4章百度都有攻略我这里就不发了，给你们个地址：未上锁的房间1-4章攻略 未上锁的房间尾声攻略：  使用目镜，扫视桌子周围，直到你看到闪着荧光蓝的奇怪标志。旋转内圈，直到墨迹变为一个手印。  桌面会出现一个凸起的圆形区域，取下目镜，查看该圆形区域的右侧，会有一个小开关出现，打开它，抽屉出现，得到齿轮    在桌子的另一边，挨着左边沾有墨迹的笔记本旁，你会看到一个方形的插销。拉动它之后，一对齿轮就会显现出来。 将三角形的齿轮放在较低的位置，触动按钮，你会看到下图这个样子：       现在，将这些小的滑块移到右下角，这样就可以把六个圈都绕一遍，然后进入一个打开的小通道。 当两个插销都被拉开时，按住开关。    一个奇怪的金属球出现在平台上，拿走它，在物品栏中打开。现在，转动金属球，直到你看到这个球顶的标志，点击标志，打开圆球，拿走齿轮。  ...</div></div></div></a><a class="pagination-related" href="/85.html" title="用于EMLOG程序的链接ICO图标缓存调用代码"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://p.upyun.com/demo/tmp/g06nrbw5.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">用于EMLOG程序的链接ICO图标缓存调用代码</div></div><div class="info-2"><div class="info-item-1">很多网站的友情链接前都有该网站的ICO图标，这样美化了友情链接的展示样式很好看；在谷歌还能访问的时候，很多都用谷歌的ICO图标接口，现在不能用了，国内也有一些ICO图标调用接口，但都不是很好，蓝叶思考了下，还是自己写个友情链接的ICO图标缓存代码吧； 下面的代码，就是获取网站根目录下的favicon.ico图标然后缓存到本地再调用出来，代码原理是先检测友情链接网站的favicon.ico是否存在是否能正常访问，如果正常则缓存到本地，否则缓存一个设置好的图标调用，这样提高了速度，不会每次都去检测缓存，只有过了30天后再检测一次； 新添加的链接缓存图标时有些慢，等待完成刷新下页面就可以看到正常显示了。有需要的就把下面代码复制到模版的module.php里，然后在需要的地方调用。 说明：使用这个代码需要在模版目录下新建个文件夹为favicon并设置可写权限，在这个文件夹下放个命名为link.png图片文件做为默认调用。 12345678910111213141516171819202122232425262728&lt;?php  function...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/294.html" title="常用的HTML代码「笔记」"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://p.upyun.com/demo/tmp/g06nrbw5.webp" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2018-08-05</div><div class="info-item-2">常用的HTML代码「笔记」</div></div><div class="info-2"><div class="info-item-1"> 加入连接：1&lt;a href=&quot;所要连接的相关地址&quot;&gt;写上你想写的字&lt;/a&gt; 在新窗口打开连接：1&lt;a href=&quot;相关地址&quot; target=&quot;\_blank&quot;&gt;写上要写的字&lt;/a&gt; 移动字体(走马灯)：1&lt;marquee&gt;写上你想写的字&lt;/marquee&gt; 背景音乐：1&lt;bgsound=&quot;背景音乐地址&quot;...</div></div></div></a><a class="pagination-related" href="/193.html" title="EMLOG -最新防CC攻击代码加强版"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://p.upyun.com/demo/tmp/AoGvKrBa.webp" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2017-10-27</div><div class="info-item-2">EMLOG -最新防CC攻击代码加强版</div></div><div class="info-2"><div class="info-item-1">将下面代码插入在module.php文件内： 代码一: 1234567891011&lt;?phpfunction maple\_cc()&#123;       session\_start();$timestampcc = time();$cc\_nowtime = $timestampcc;if(isset($\_SESSION\[&#x27;cc\_lasttime&#x27;\]))&#123;$cc\_lasttime = $\_SESSION\[&#x27;cc\_lasttime&#x27;\];$cc\_times = $\_SESSION\[&#x27;cc\_times&#x27;\]+1;$\_SESSION\[&#x27;cc\_times&#x27;\] = $cc\_times;&#125;else&#123;$cc\_lasttime = $cc\_nowtime;$cc\_times = 1;$\_SESSION\[&#x27;cc\_times&#x27;\] =...</div></div></div></a><a class="pagination-related" href="/57.html" title="Emlog实现全文+标题搜索方法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://p.upyun.com/demo/tmp/g06nrbw5.webp" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2018-05-04</div><div class="info-item-2">Emlog实现全文+标题搜索方法</div></div><div class="info-2"><div class="info-item-1">emlog官方默认默认搜索引擎，只支持搜索日志标题，我想着应该是处于多方面的考虑，基本各位站长自己的需求，我们还是可以做更改的，只要你的服务器允许的话。 找到文件include&#x2F;controller&#x2F;search_controller.php中的以下代码： 1$sqlSegment = &quot;and title like &#x27;%&#123;$keyword&#125;%&#x27; order by date desc&quot;;  替换为 1$sqlSegment = &quot;and ( title like &#x27;%&#123;$keyword&#125;%&#x27; or content like &#x27;%&#123;$keyword&#125;%&#x27; ) order by date desc&quot;;  注意：全文检索对服务器会造成一定的压力，特别是你的文章特别多的时候，是不建议的，万一当机了就不好玩了，是吧。 </div></div></div></a><a class="pagination-related" href="/201.html" title="emlog通过pjax实现无刷新加载网页"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://p.upyun.com/demo/tmp/5swGxAfV.webp" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2017-11-05</div><div class="info-item-2">emlog通过pjax实现无刷新加载网页</div></div><div class="info-2"><div class="info-item-1">准备文件  编辑模板 header.php 的 head 添加必要文件： jquery-1.11.1.min.js：下载 jquery.pjax-1.8.2.min.js：下载 下载到模板的 scripts 目录(没有的话就新建一个)下后将下面两句添加到所有script标签的最前面: 12&lt;script type=&quot;text/javascript&quot; src=&quot;&lt;?php echo TEMPLATE\_URL; ?&gt;scripts/jquery-1.11.1.min.js&quot;&gt;&lt;/script&gt;&lt;script type=&quot;text/javascript&quot; src=&quot;&lt;?php echo TEMPLATE\_URL; ?&gt;scripts/jquery.pjax-1.8.2.min.js&quot;&gt;&lt;/script&gt; 注意：jQuery需要1.7.0版本以上的才有pushState的封装 使用pjax  编辑模版 footer.php...</div></div></div></a><a class="pagination-related" href="/184.html" title="EMLOG非插件实现自动标签内链功能"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://p.upyun.com/demo/tmp/g06nrbw5.webp" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2017-10-17</div><div class="info-item-2">EMLOG非插件实现自动标签内链功能</div></div><div class="info-2"><div class="info-item-1">曾经用过WordPress的就知道有自动标签内链功能，就一直很想怎么在EMLOG实现。 如今现在给你们分享一下不需要改EMLOG内核也可以实现自动标签内链功能！ 方法很简单，提取三合一EMLOG的功能，一共有两个个步骤…. 首先在模板目录module.php文件中加入以下代码： 12345678910111213141516&lt;?php  //自动标签内链   function nltag($content ,$domain) &#123;            global $CACHE;              $tag\_cache = $CACHE-&gt;readCache(&#x27;tags&#x27;);                          foreach($tag\_cache as $value)&#123;                  $tag\_url = Url::tag($value\[&#x27;tagurl&#x27;\]);                  $keyword =...</div></div></div></a><a class="pagination-related" href="/68.html" title="js实现网页倒计时、网站已运行时间功能的代码2例"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://p.upyun.com/demo/tmp/bjnJ52wA.jpeg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2017-08-18</div><div class="info-item-2">js实现网页倒计时、网站已运行时间功能的代码2例</div></div><div class="info-2"><div class="info-item-1">1.显示格式：距离结束时间还有：00天05小时25分30秒（秒为跑秒） 代码如下： 12345678910111213141516171819202122232425262728293031323334353637&lt;div id=&quot;time&quot; class=&quot;time&quot;&gt;&lt;/div&gt;&lt;script language=javascript&gt;    function show\_date\_time()&#123;    window.setTimeout(&quot;show\_date\_time()&quot;, 1000);    target=new Date(2017,02,08,0,0,0);  //注意：表示月份的参数介于 0 到 11 之间。也就是说，如果希望把月设置为8月，则参数应该是7。 today=new Date();  timeold=(target.getTime()-today.getTime());    sectimeold=timeold/1000   ...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Valine</span><span id="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://q1.qlogo.cn/g?b=qq&amp;nk=898467886&amp;s=640" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">亦桉</div><div class="author-info-description">汐岑小窝(blog.aneu.cn)是一个记忆点滴的个人博客网站</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">169</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">181</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://www.aneu.cn/"><i class="fas circle-user"></i><span>亦桉</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">如有文章下载资源失效请发邮件到 me@aneu.cn (附上链接地址)</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/336.html" title="一键全面卸载宝塔面板WEB运行环境"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://p.upyun.com/demo/tmp/AoGvKrBa.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="一键全面卸载宝塔面板WEB运行环境"/></a><div class="content"><a class="title" href="/336.html" title="一键全面卸载宝塔面板WEB运行环境">一键全面卸载宝塔面板WEB运行环境</a><time datetime="2025-05-02T10:21:24.806Z" title="更新于 2025-05-02 18:21:24">2025-05-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/202.html" title="汐岑网新浪外链图床上传源码"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://p.upyun.com/demo/tmp/GdKbdDmz.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="汐岑网新浪外链图床上传源码"/></a><div class="content"><a class="title" href="/202.html" title="汐岑网新浪外链图床上传源码">汐岑网新浪外链图床上传源码</a><time datetime="2025-05-02T10:19:31.922Z" title="更新于 2025-05-02 18:19:31">2025-05-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/67.html" title="最详细的新手建站教程，不用写代码"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://p.upyun.com/demo/tmp/AoGvKrBa.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="最详细的新手建站教程，不用写代码"/></a><div class="content"><a class="title" href="/67.html" title="最详细的新手建站教程，不用写代码">最详细的新手建站教程，不用写代码</a><time datetime="2025-05-02T10:19:31.899Z" title="更新于 2025-05-02 18:19:31">2025-05-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/266.html" title="微信内置浏览器自动跳转其它浏览器"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://p.upyun.com/demo/tmp/GdKbdDmz.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="微信内置浏览器自动跳转其它浏览器"/></a><div class="content"><a class="title" href="/266.html" title="微信内置浏览器自动跳转其它浏览器">微信内置浏览器自动跳转其它浏览器</a><time datetime="2025-05-02T10:19:31.873Z" title="更新于 2025-05-02 18:19:31">2025-05-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/23.html" title="好看的变形金刚跳转单页可作为404页面"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://p.upyun.com/demo/tmp/PHfCY6GT.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="好看的变形金刚跳转单页可作为404页面"/></a><div class="content"><a class="title" href="/23.html" title="好看的变形金刚跳转单页可作为404页面">好看的变形金刚跳转单页可作为404页面</a><time datetime="2025-05-02T10:19:31.858Z" title="更新于 2025-05-02 18:19:31">2025-05-02</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(https://p.upyun.com/demo/tmp/JBUyywbh.webp);"><div id="footer-wrap"><div class="copyright">&copy;2025 By 亦桉</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div><div class="footer_custom_text"><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><span>赣ICP备19000739号-3</span></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="/"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'hyHLsC6joSduj1V452hELSz6-gzGzoHsz',
+      appKey: 'BavMEDzKnXDhwcPQePyKjiyV',
+      avatar: '',
+      serverURLs: '',
+      emojiMaps: "",
+      visitor: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  const initGitalk = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGitalk = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const gitalk = new Gitalk({
+      clientID: 'Ov23lil2P9WfKkGu3iPb',
+      clientSecret: '61eac3fa5bb6a084322d6bdf03c7de2bb91dbb4d',
+      repo: 'BlogGitalkComment',
+      owner: 'meyzh',
+      admin: ['meyzh'],
+      updateCountCallback: commentCount,
+      ...option,
+      id: isShuoshuo ? path : (option && option.id) || '28ab44f3412086b07d1eb0ee31194e12'
+    })
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async(el, path) => {
+    if (typeof Gitalk === 'function') initGitalk(el, path)
+    else {
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js')
+      initGitalk(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Gitalk'
+      ? window.shuoshuoComment = { loadComment: loadGitalk }
+      : window.loadOtherComment = loadGitalk
+    return
+  }
+
+  if ('Valine' === 'Gitalk' || !false) {
+    if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><script src="https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js"></script><script>window.newestComments = {
+  changeContent: content => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<code>.*?<\/code>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g, "") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0, 150) + '...'
+    }
+    return content
+  },
+
+  generateHtml: (array, ele) => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class="aside-list-item">'
+
+        if (true && array[i].avatar) {
+          const imgAttr = 'data-lazy-src'
+          const lazyloadNative = ''
+          result += `<a href="${array[i].url}" class="thumbnail"><img ${imgAttr}="${array[i].avatar}" alt="${array[i].nick}" ${lazyloadNative}></a>`
+        }
+
+        result += `<div class="content">
+        <a class="comment" href="${array[i].url}" title="${array[i].content}">${array[i].content}</a>
+        <div class="name"><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '暂无评论'
+    }
+
+    ele.innerHTML = result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh(ele)
+  },
+
+  newestCommentInit: (name, getComment) => {
+    const $dom = document.querySelector('#card-newest-comments .aside-list')
+    if ($dom) {
+      const data = btf.saveToLocal.get(name)
+      if (data) {
+        newestComments.generateHtml(JSON.parse(data), $dom)
+      } else {
+        getComment($dom)
+      }
+    }
+  },
+
+  run: (name, getComment) => {
+    newestComments.newestCommentInit(name, getComment)
+    btf.addGlobalFn('pjaxComplete', () => newestComments.newestCommentInit(name, getComment), name)
+  }
+}</script><script>window.addEventListener('load', () => {
+  const keyName = 'valine-newest-comments'
+  const { changeContent, generateHtml, run } = window.newestComments
+
+  const getIcon = (icon, mail) => {
+    if (icon) return icon
+    let defaultIcon = ''
+    let iconUrl = `https://gravatar.loli.net/avatar/${md5(mail.toLowerCase()) + defaultIcon}`
+    return iconUrl
+  }
+
+  const getComment = ele => {
+    const serverURL = 'https://hyHLsC6j.api.lncldglobal.com'
+
+    var settings = {
+      "method": "GET",
+      "headers": {
+        "X-LC-Id": 'hyHLsC6joSduj1V452hELSz6-gzGzoHsz',
+        "X-LC-Key": 'BavMEDzKnXDhwcPQePyKjiyV',
+        "Content-Type": "application/json"
+      },
+    }
+
+    fetch(`${serverURL}/1.1/classes/Comment?limit=6&order=-createdAt`,settings)
+      .then(response => response.json())
+      .then(data => {
+        const valineArray = data.results.map(e => {
+          return {
+            'avatar': getIcon(e.QQAvatar, e.mail),
+            'content': changeContent(e.comment),
+            'nick': e.nick,
+            'url': e.url + '#' + e.objectId,
+            'date': e.updatedAt,
+          }
+        })
+        btf.saveToLocal.set(keyName, JSON.stringify(valineArray), 10/(60*24))
+        generateHtml(valineArray, ele)
+      }).catch(e => {
+        console.error(e)
+        ele.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+  }
+
+  run(keyName, getComment)
+})</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id:"Kn8xFU3KjIn8gbXJ",ck:"Kn8xFU3KjIn8gbXJ"})</script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      true 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
